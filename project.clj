@@ -3,4 +3,4 @@
   :dependencies [[org.clojure/clojure "1.3.0"]
                 [frak "0.1.2"]]
   :main regard.core
-)
+  :aot [regard.core])

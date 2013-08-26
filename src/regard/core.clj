@@ -1,26 +1,10 @@
-(ns regard.core)
+(ns regard.core
+  (:gen-class))
 
 (require 'frak)
 
-(defn -main
-  "I don't do a whole lot."
-  [& args]
-  (frak/pattern ["foo" "bar" "baz" "quux"])
-  (println "Hello, World! arg? %s" args))
-
-(def command (atom ""))
-
-(defn print-prompt []
-  (print "prompt> ")
-  (flush)
-)
-
-(defn ask-for-input []
-    (print-prompt)
-    (let [x (str (read-line))]
-      (println (str "User input: " x))
-      (reset! command x)
-    )
-)
-
-(ask-for-input)
+(defn -main [& args]
+  "Take ARGS and pass them to frak, insult the user if none."
+  (if args
+    (println "Regexp : %s" (frak/pattern (vec args)))
+    (println "usage: app_name \"pattern1\" \"pattern2\" \"patternN\"")))
