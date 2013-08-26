@@ -227,7 +227,7 @@ Et pour ce qui est du code, nous avons appris à récupérer les arguments pass�
 
 ### Ressources
 
-- Le [fichier clore.clj](https://github.com/xaccrocheur/regard/blob/master/src/regard/core.clj)
+- Le [fichier core.clj](https://github.com/xaccrocheur/regard/blob/master/src/regard/core.clj)
 - Le [fichier project.clj](https://github.com/xaccrocheur/regard/blob/master/project.clj)
 - Le [repo github du projet](https://github.com/xaccrocheur/regard)
 - Le [source de ce journal](https://github.com/xaccrocheur/regard/blob/master/linuxfr-regard.md) (pour diffs éventuels)
