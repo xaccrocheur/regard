@@ -185,7 +185,7 @@ Ctrl-c pour sortir du repl, maintenant on va exécuter notre générateur de reg
 $ lein run
 usage: app_name "pattern1" "pattern2" "patternN"
 $ lein run "plip" "plop"
-Regexp : %s #"pl(?:[oi]p)"
+Regexp : #"pl(?:[oi]p)"
 ```
 Tu viens de faire ton premier programme en Clojure, c'est pas l'heure ~~de l'apéro~~ du goûter que j'entends ? Atta, juste un dernier truc :
 
@@ -208,7 +208,7 @@ Created (NDLR : obfustated)/regard/regard.jar
 
 ```sh
 $ java -jar regard.jar "plip" "plop"
-Regexp : %s #"pl(?:[oi]p)"
+Regexp : #"pl(?:[oi]p)"
 ```
 
 Que sais-je ? Pas grand' chose ;)
