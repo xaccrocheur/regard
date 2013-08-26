@@ -223,7 +223,7 @@ Nous avons un environnement
 - de tests (on verra les tests + tard, quand j'en aurai fait en fait ;) ;
 - de compilation
 
-Et pour ce qui est du code, nous avons appris à récupérer les arguments passés en ligne de commande pour les passer en paramètres à une fonction.
+Pour ce qui est du code, nous avons appris à récupérer les arguments passés en ligne de commande pour les passer en paramètres à une fonction.
 
 ### Ressources
 
