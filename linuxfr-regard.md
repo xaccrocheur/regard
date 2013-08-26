@@ -34,11 +34,11 @@ Leiningen
 Leiningen va donc s'occuper
 
 - De créer l'arborescence du projet
-- De permettre la mise en place et l'exécution d'un REPL (voir + loin) pour évaluer du code
+- De permettre la mise en place et l'exécution d'un REPL (voir + loin) pour évaluer du code dans l'evironnement même du projet (pas juste dans un shell interactif comme celui de Ruby, par exemple)
 - De télécharger et gérer primitivement les versions des diverses dépendances (bibliothèques / libs) à l'exécution
 - De mettre en place et faire tourner des tests
 - D'envoyer un SMS à ton conjoint comme quoi tu auras un peu de retard
-- De compiler vers des cibles diverses
+- De compiler vers des cibles diverses, contre les libs précitées (statique) ou non (dynamique)
 
 (2) Le tuto de Leininger est disponible à tout moment en tapant `lein help tutorial`
 
@@ -78,7 +78,7 @@ $ find .
 ./.gitignore
 ```
 
-Et c'est dans cet environnement qu'on va exécuter Clojure, dont on va tout de suite spécifier qu'on souhaite une version récente, en ouvrant le fichier `./project.clj` qui doit ressembler à ça :
+Et c'est dans cet environnement qu'on va exécuter Clojure, dont on va tout de suite spécifier qu'on en souhaite une version récente, en ouvrant le fichier `./project.clj` qui doit ressembler à ceci :
 
 ```lisp
 (defproject regard "1.0.0-SNAPSHOT"
@@ -86,7 +86,7 @@ Et c'est dans cet environnement qu'on va exécuter Clojure, dont on va tout de s
   :dependencies [[org.clojure/clojure "1.3.0"]])
 ```
 
-Et qu'on va éditer pour qu'il ressemble à ça :
+Et qu'on va éditer pour qu'il ressemble à cela :
 
 ```lisp
 (defproject regard "1.0.0-SNAPSHOT"
@@ -102,9 +102,9 @@ Donc dans l'ordre
 
 - defproject - note la forme (1 2 3 n) où 1 est une fonction et tout le reste des arguments passés à cette dernière - voir plus loin pour la doc de cette fonction
 - La description du projet
-- Les dépendances dont le projet a besoin (leiningen s'occupera de les télécharger, voir + loin) et [Clojure](https://github.com/clojure/clojure) en est une (note le bump de version) ainsi que [frak](https://github.com/noprompt/frak)
+- Les dépendances dont le projet a besoin (Leiningen s'occupera de les télécharger, voir + loin) et [Clojure](https://github.com/clojure/clojure) en est une (note le bump de version) ainsi que [frak](https://github.com/noprompt/frak)
 - Le nom de la fonction d'entrée du programme, pour éviter de la passer à chaque fois en paramètre : `Providing a -m argument will tell Leiningen to look for the -main function in another namespace. Setting a default :main in project.clj lets you omit -m`.
-- Le paramètre de compilation "Ahead Of Time" nécessaire plus tard à la compilation
+- Le paramètre de compilation "Ahead Of Time" nécessaire plus tard à la compilation du binaire standalone (statique)
 - Le nom de notre exécutable final
 
 
@@ -119,14 +119,14 @@ Maintenant on va coder le programme à proprement parler, en ouvrant `core.clj` 
 (defn -main [& args]
   "Take ARGS and pass them to frak, insult the user otherwise."
   (if args
-    (println "Regexp : " (frak/pattern (vec args)))
+    (println "Regexp :" (frak/pattern (vec args)))
     (println "usage: regard \"pattern1\" \"pattern2\" \"patternN\"")))
 ```
 
 Dans l'ordre
 
 - La déclaration `(:gen-class)` sous la forme *ns* correspondant au namespace spécifié plus haut dans `project.clj`
-- Le require de la librairie frak, qui est déjà disponible car elle sera téléchargée au run-time - pour être compilée avec l'exécutable final - si elle est absente où pas à jour (même chose pour clojure, qu'on a juste pas besoin de requirer) - note le "quote" et faisons court : le quote permet de ne pas évaluer l'expression (un mot seul, non entouré de parenthèses, en principe c'est une variable) et de passer le *mot* **frak** littéralement.
+- Le require de la librairie frak, qui est déjà disponible car elle sera téléchargée au run-time - pour être compilée / linkée avec l'exécutable final - si elle est absente où pas à jour (même chose pour clojure, qu'on a juste pas besoin de requirer) - note le "quote" et faisons court : le quote permet de ne pas évaluer l'expression (un mot seul, non entouré de parenthèses, en principe c'est une variable) et de passer le *mot* **frak** littéralement.
 - La déclaration de la [fonction](http://clojure-doc.org/articles/language/functions.html) qui suit les règles de Lisp (pratiques sinon stylistiques : note la bizarre indentation de la forme if ((if condition then else) où then et else sont des expressions, et non des mots-clefs) alors qu'[en emacs lisp elles sont décalées, et c'est nettement plus lisible](https://www.gnu.org/software/emacs/manual/html_node/eintr/else.html), bref) tiens ben on va lancer le [repl](https://en.wikipedia.org/wiki/Read-eval-print_loop) pour obtenir de la doc sur la fonction `defn` shall we d'accord ?
 
 Read, Eval, Print Loop
@@ -153,7 +153,7 @@ Macro
 nil
 ```
 
-Qui nous dit tout ce qu'il y a à savoir sur la fonction en question (comme C-h f FUNCTION_NAME dans emacs).
+Qui nous dit tout ce qu'il y a à savoir sur la fonction en question (comme C-h f FUNCTION_NAME dans emacs) qui est en fait une macro.
 
 Pendant que tu y est, entre quelques formes [Lisp](https://en.wikipedia.org/wiki/Lisp_%28programming_language%29) pour te faire la main :
 
@@ -218,10 +218,10 @@ Nous avons maintenant un outil bien sympa, compilé, portable, pour nous aider �
 Nous avons un environnement
 
 - d'évaluation ;
-- de documentation
+- de documentation ;
 - de développement ;
 - de tests (on verra les tests + tard, quand j'en aurai fait en fait ;) ;
-- de compilation
+- de compilation.
 
 Pour ce qui est du code, nous avons appris à récupérer les arguments passés en ligne de commande pour les passer en paramètres à une fonction.
 
