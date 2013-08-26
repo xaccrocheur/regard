@@ -4,10 +4,10 @@ Motivation / Besoins
 -----------
 Je suis tombé sur [cet article](http://thechangelog.com/frak-takes-an-entirely-different-approach-to-generating-regular-expressions/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+thechangelog+%28The+Changelog%29) du changelog qui m'a rappellé que
 
-- J'aimerais bien construire des regexps en commençant par la fin, C à D passer des patterns à un générateur qui me sortirait l'expression ad-hoc (1) pas toi ?
-- Ça fait un moment que Clojure me fait de l'oeil, c'est le moment de plonger, non ?
+- J'aimerais bien construire des expressions régulières en commençant par la fin, C à D passer des chaînes de caractères à un générateur qui me sortirait l'expression ad-hoc (1) pas toi ?
+- Ça fait un moment que [Clojure](http://clojure.org/) me fait de l'oeil, c'est le moment de plonger, non ?
 
-(1) Normalement pour ça j'utilise le [regexp-builder d'Emacs](http://www.masteringemacs.org/articles/2011/04/12/re-builder-interactive-regexp-builder/), qui te permet de voir directement ce qui matche dans le buffer courant. Donc dans l'autre sens : D'abord le code, ensuite les données.
+(1) Normalement pour ça j'utilise le [regexp-builder d'Emacs](http://www.masteringemacs.org/articles/2011/04/12/re-builder-interactive-regexp-builder/), qui te permet de voir directement ce qui matche dans le buffer courant. Donc dans l'autre sens : D'abord le code, ensuite les données. Là, on va prendre l'autre route, et tenter d'apprendre quelque chose en chemin :)
 
 ![Clojure](http://clojure.org/file/view/clojure-icon.gif)
 
@@ -100,7 +100,7 @@ Et qu'on va éditer pour qu'il ressemble à ça :
 
 Donc dans l'ordre
 
-- defproject - note la forme (1 2 3 n) où 1 est une fonction est tout le reste les arguments passés à cette dernière - voir plus loin pour la doc de cette fonction
+- defproject - note la forme (1 2 3 n) où 1 est une fonction et tout le reste des arguments passés à cette dernière - voir plus loin pour la doc de cette fonction
 - La description du projet
 - Les dépendances dont le projet a besoin (leiningen s'occupera de les télécharger, voir + loin) et [Clojure](https://github.com/clojure/clojure) en est une (note le bump de version) ainsi que [frak](https://github.com/noprompt/frak)
 - Le nom de la fonction d'entrée du programme, pour éviter de la passer à chaque fois en paramètre : `Providing a -m argument will tell Leiningen to look for the -main function in another namespace. Setting a default :main in project.clj lets you omit -m`.
@@ -211,7 +211,7 @@ $ java -jar regard.jar "plip" "plop"
 Regexp : %s #"pl(?:[oi]p)"
 ```
 
-What have we learned?
+Ça sert à quoi ?
 -----------
 
 Nous avons maintenant un outil bien sympa, compilé, portable, pour nous aider à élaborer des expressions régulières amoureusement chantournées, et nous l'avons réalisé en Java en parlant à la JVM sur un ton qu'on n'avait pas jusqu'ici l'habitude d'employer.
