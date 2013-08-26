@@ -211,7 +211,7 @@ $ java -jar regard.jar "plip" "plop"
 Regexp : %s #"pl(?:[oi]p)"
 ```
 
-Ça sert à quoi ?
+Que sais-je ? Pas grand' chose ;)
 -----------
 
 Nous avons maintenant un outil bien sympa, compilé, portable, pour nous aider à élaborer des expressions régulières amoureusement chantournées, et nous l'avons réalisé en Java en parlant à la JVM sur un ton qu'on n'avait pas jusqu'ici l'habitude d'employer.
