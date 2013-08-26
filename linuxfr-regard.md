@@ -119,7 +119,7 @@ Maintenant on va coder le programme à proprement parler, en ouvrant `core.clj` 
 (defn -main [& args]
   "Take ARGS and pass them to frak, insult the user otherwise."
   (if args
-    (println "Regexp : %s" (frak/pattern (vec args)))
+    (println "Regexp : " (frak/pattern (vec args)))
     (println "usage: regard \"pattern1\" \"pattern2\" \"patternN\"")))
 ```
 
