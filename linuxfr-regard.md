@@ -4,7 +4,7 @@ Motivation / Besoins
 -----------
 Je suis tombé sur [cet article](http://thechangelog.com/frak-takes-an-entirely-different-approach-to-generating-regular-expressions/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+thechangelog+%28The+Changelog%29) du changelog qui m'a rappellé que
 
-- J'aimerais bien construire des regexps en commençant par la fin, C à D passer des patterns à un générateur qui me sortirait l'expression ad-hoc (1)
+- J'aimerais bien construire des regexps en commençant par la fin, C à D passer des patterns à un générateur qui me sortirait l'expression ad-hoc (1) pas toi ?
 - Ça fait un moment que Clojure me fait de l'oeil, c'est le moment de plonger, non ?
 
 (1) Normalement pour ça j'utilise le [regexp-builder d'Emacs](http://www.masteringemacs.org/articles/2011/04/12/re-builder-interactive-regexp-builder/), qui te permet de voir directement ce qui matche dans le buffer courant. Donc dans l'autre sens : D'abord le code, ensuite les données.
@@ -24,6 +24,11 @@ Clojure compile to JS ([repl online](http://himera.herokuapp.com/index.html)) gr
 
 Leiningen
 -----------
+
+*"Leiningen!" he shouted. "You're insane! They're not creatures you can fight—they're an elemental—an 'act of God!' Ten miles long, two miles wide—ants, nothing but ants! And every single one of them a fiend from hell..."*
+
+*"Leiningen Versus the Ants" by Carl Stephenson*
+
 [Leiningen](http://leiningen.org/) semble à peu près incontournable pour utiliser clojure "without setting your hair on fire" et de fait, [la doc](http://leiningen.org/#docs) est un point d'entrée remarquable vers le langage lui-même. Dans [le tutorial](https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md) (2) Leinigen se présente comme suit "If you come from the Java world, Leiningen could be thought of as "Maven meets Ant without the pain". For Ruby and Python folks, Leiningen combines RubyGems/Bundler/Rake and pip/Fabric in a single tool". Autant dire que c'est pas rien.
 
 Leiningen va donc s'occuper
@@ -115,13 +120,13 @@ Maintenant on va coder le programme à proprement parler, en ouvrant `core.clj` 
   "Take ARGS and pass them to frak, insult the user otherwise."
   (if args
     (println "Regexp : %s" (frak/pattern (vec args)))
-    (println "usage: app_name \"pattern1\" \"pattern2\" \"patternN\"")))
+    (println "usage: regard \"pattern1\" \"pattern2\" \"patternN\"")))
 ```
 
 Dans l'ordre
 
 - La déclaration `(:gen-class)` sous la forme *ns* correspondant au namespace spécifié plus haut dans `project.clj`
-- Le require de la librairie frak, qui est déjà disponible car elle sera téléchargée au run-time si elle est absente où pas à jour (même chose pour clojure, qu'on a juste pas besoin de requirer) - note le "quote" et faisons court : le quote permet de ne pas évaluer l'expression (un mot seul, non entouré de parenthèses, en principe c'est une variable) et de passer le *mot* **frak** littéralement.
+- Le require de la librairie frak, qui est déjà disponible car elle sera téléchargée au run-time - pour être compilée avec l'exécutable final - si elle est absente où pas à jour (même chose pour clojure, qu'on a juste pas besoin de requirer) - note le "quote" et faisons court : le quote permet de ne pas évaluer l'expression (un mot seul, non entouré de parenthèses, en principe c'est une variable) et de passer le *mot* **frak** littéralement.
 - La déclaration de la [fonction](http://clojure-doc.org/articles/language/functions.html) qui suit les règles de Lisp (pratiques sinon stylistiques : note la bizarre indentation de la forme if ((if condition then else) où then et else sont des expressions, et non des mots-clefs) alors qu'[en emacs lisp elles sont décalées, et c'est nettement plus lisible](https://www.gnu.org/software/emacs/manual/html_node/eintr/else.html), bref) tiens ben on va lancer le [repl](https://en.wikipedia.org/wiki/Read-eval-print_loop) pour obtenir de la doc sur la fonction `defn` shall we d'accord ?
 
 Read, Eval, Print Loop
@@ -170,7 +175,7 @@ regard.core=> (+ 1 2 3)
 (javax.swing.JOptionPane/showMessageDialog nil "Linuxfr est un nid à trolls") ; Huhu ;)
 ```
 
-Et répète 7 fois en oscillant d'avant en arrière "Dans Clojure, tout sauf false et nil évalue à true".
+Et répète 7 fois en oscillant d'avant en arrière "En [Lisp](http://www.cs.sfu.ca/CourseCentral/310/pwfong/Lisp/1/tutorial1.html), tout sauf false / nil évalue à true".
 
 Éxécution, allez, allez, pas d'discussion
 -----------
@@ -209,7 +214,7 @@ Regexp : %s #"pl(?:[oi]p)"
 What have we learned?
 -----------
 
-Nous avons maintenant un petit outil bien sympa, compilé, portable, pour nous aider à élaborer des expressions régulières amoureusement chantournées, et nous l'avons réalisé en Java en parlant à la JVM sur un ton qu'on n'avait pas jusqu'ici l'habitude d'employer.
+Nous avons maintenant un outil bien sympa, compilé, portable, pour nous aider à élaborer des expressions régulières amoureusement chantournées, et nous l'avons réalisé en Java en parlant à la JVM sur un ton qu'on n'avait pas jusqu'ici l'habitude d'employer.
 Nous avons un environnement
 
 - d'évaluation ;
@@ -217,6 +222,8 @@ Nous avons un environnement
 - de développement ;
 - de tests (on verra les tests + tard, quand j'en aurai fait en fait ;) ;
 - de compilation
+
+Et pour ce qui est du code, nous avons appris à récupérer les arguments passés en ligne de commande pour les passer en paramètres à une fonction.
 
 ### Ressources
 
